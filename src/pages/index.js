@@ -79,56 +79,37 @@ const IndexPage = () => {
         if (player === 2) {
           alert("Você Venceu!!!")
           break
-        }
-        if (computer === 2) {
+        } else if (computer === 2) {
           alert("Você Venceu!!!")
           break
-        }
-        if (
+        } else if (
           game[`${line}${column}`] === "X" &&
           game[`${line}${column + 1}`] === "X" &&
           game[`${line}${column + 2}`] === "X"
         ) {
           player++
-        }
-        if (
+        } else if (
           game[`${line}${column}`] === "O" &&
           game[`${line}${column + 1}`] === "O" &&
           game[`${line}${column + 2}`] === "O"
         ) {
           computer++
+        } else if (
+          game[`${line}${column}`] === "X" &&
+          game[`${line + 1}${column}`] === "X" &&
+          game[`${line + 2}${column}`] === "X"
+        ) {
+          player++
+        } else if (
+          game[`${line}${column}`] === "O" &&
+          game[`${line + 1}${column}`] === "O" &&
+          game[`${line + 2}${column}`] === "O"
+        ) {
+          player++
         }
       }
     }
   }
-
-  /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas colunas do Casas, procurando um vencedor*/
-  // const allElementsInSomeColumn = function() {
-  //     for( var i = 0; i < 3; i++) {
-  // if (Casas[i] === "X" && Casas[i + 3] === "X" && Casas[i + 24] === "X") {
-  //   alert(JogadorOne.nome + " Venceu!!!")
-  //   reset()
-  // }
-  // if (Casas[i] === "O" && Casas[i + 3] === "O" && Casas[i + 24] === "O") {
-  //   alert(JogadorTwo.nome + " Venceu!!!")
-  //   reset()
-  // }
-  //     }
-
-  // }
-
-  /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas diagonais do Casas, procurando um vencedor*/
-  // const allElementsInSomeDiagonal = function() {
-  //     if ( (Casas[0] === 'X' && Casas[4] === 'X' && Casas[8] === 'X') ||
-  //          (Casas[2] === 'X' && Casas[4] === 'X' && Casas[6] === 'X')) {
-  //             alert (JogadorOne.nome + ' Venceu!!!');
-  //         reset();
-  //     } else if ( (Casas[0] === 'O' && Casas[4] === 'O' && Casas[8] === 'O') ||
-  //                 (Casas[2] === 'O' && Casas[4] === 'O' && Casas[6] === 'O') ) {
-  //             alert (JogadorTwo.nome + ' Venceu!!!');
-  //         reset();
-  //     }
-  // }
 
   checkTable()
 
