@@ -8,3 +8,7 @@ Após instalado, basta rodar:
 npm install -g gatsby-cli
 npm run start
 ```
+
+Visualização do App
+
+![view of app](src/images/jogo-da-velha.gif)
