@@ -6,7 +6,8 @@ const IndexPage = () => {
   const [boardColumn, setBoardColumn] = useState(0)
   const [board, setBoard] = useState()
   const [game, setGame] = useState([])
-  const [playing, setPlaying] = useState(true)
+  const [counterPlayer, setCounterPlayer] = useState(0)
+  const [counterComputer, setCounterComputer] = useState(0)
 
   const createTable = (boardLine, boardColumn) => {
     const boardObj = {}
@@ -40,31 +41,96 @@ const IndexPage = () => {
   const computerPlay = () => {
     let jogar = 0
     let l, c
-    let position = ""
+    let positionComputer = ""
     do {
       l = Math.round(Math.random() * (boardLine - 1)) + 1
       c = Math.round(Math.random() * (boardColumn - 1)) + 1
-      position = `${l}${c}`
-      console.log({ l, c, position })
-      const element = document.getElementById(position)
+      positionComputer = `${l}${c}`
+      const element = document.getElementById(positionComputer)
       if (element.innerText === "" && element.innerText !== "X") {
         element.innerText = "0"
         jogar = 1
       }
-    } while (game[position] != "" && jogar === 0)
+    } while (game[positionComputer] != "" && jogar === 0)
+
+    return positionComputer
   }
 
   const play = (position, player) => {
-    game[position] = "X"
-
     const element = document.getElementById(position)
 
     if (element.innerText === "") {
       element.innerText = "X"
     }
 
-    computerPlay()
+    const positionComputer = computerPlay()
+    const newObjPLayer = { ...game, [position]: "X", [positionComputer]: "O" }
+    console.log({ newObjPLayer })
+    setGame(newObjPLayer)
   }
+
+  const checkTable = function () {
+    let player = 0
+    let computer = 0
+
+    for (let line = 1; line <= boardLine; line++) {
+      for (let column = 1; column <= boardColumn; column++) {
+        console.log({ player, computer })
+        if (player === 2) {
+          alert("Você Venceu!!!")
+          break
+        }
+        if (computer === 2) {
+          alert("Você Venceu!!!")
+          break
+        }
+        if (
+          game[`${line}${column}`] === "X" &&
+          game[`${line}${column + 1}`] === "X" &&
+          game[`${line}${column + 2}`] === "X"
+        ) {
+          player++
+        }
+        if (
+          game[`${line}${column}`] === "O" &&
+          game[`${line}${column + 1}`] === "O" &&
+          game[`${line}${column + 2}`] === "O"
+        ) {
+          computer++
+        }
+      }
+    }
+  }
+
+  /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas colunas do Casas, procurando um vencedor*/
+  // const allElementsInSomeColumn = function() {
+  //     for( var i = 0; i < 3; i++) {
+  // if (Casas[i] === "X" && Casas[i + 3] === "X" && Casas[i + 24] === "X") {
+  //   alert(JogadorOne.nome + " Venceu!!!")
+  //   reset()
+  // }
+  // if (Casas[i] === "O" && Casas[i + 3] === "O" && Casas[i + 24] === "O") {
+  //   alert(JogadorTwo.nome + " Venceu!!!")
+  //   reset()
+  // }
+  //     }
+
+  // }
+
+  /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas diagonais do Casas, procurando um vencedor*/
+  // const allElementsInSomeDiagonal = function() {
+  //     if ( (Casas[0] === 'X' && Casas[4] === 'X' && Casas[8] === 'X') ||
+  //          (Casas[2] === 'X' && Casas[4] === 'X' && Casas[6] === 'X')) {
+  //             alert (JogadorOne.nome + ' Venceu!!!');
+  //         reset();
+  //     } else if ( (Casas[0] === 'O' && Casas[4] === 'O' && Casas[8] === 'O') ||
+  //                 (Casas[2] === 'O' && Casas[4] === 'O' && Casas[6] === 'O') ) {
+  //             alert (JogadorTwo.nome + ' Venceu!!!');
+  //         reset();
+  //     }
+  // }
+
+  checkTable()
 
   return (
     <div className="page">
