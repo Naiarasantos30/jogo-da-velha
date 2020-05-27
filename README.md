@@ -12,3 +12,9 @@ npm run start
 Visualização do App
 
 ![view of app](src/images/jogo-da-velha.gif)
+
+## Para buildar arquivos html, css e js
+
+```shell
+npm run build
+```
